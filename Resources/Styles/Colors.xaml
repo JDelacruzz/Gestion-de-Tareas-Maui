@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <!-- ================================ -->
+    <!-- COLORES BASE MAUI (requeridos)   -->
+    <!-- ================================ -->
+    <Color x:Key="Primary">#6C63FF</Color>
+    <Color x:Key="PrimaryDark">#4F46E5</Color>
+    <Color x:Key="PrimaryDarkText">#FFFFFF</Color>
+    <Color x:Key="Secondary">#F97316</Color>
+    <Color x:Key="SecondaryDarkText">#FFFFFF</Color>
+    <Color x:Key="Tertiary">#10B981</Color>
+    <Color x:Key="White">#FFFFFF</Color>
+    <Color x:Key="Black">#1A1A2E</Color>
+    <Color x:Key="Magenta">#D600AA</Color>
+    <Color x:Key="MidnightBlue">#190649</Color>
+    <Color x:Key="OffBlack">#1F1F1F</Color>
+    <Color x:Key="Gray100">#E1E1E1</Color>
+    <Color x:Key="Gray200">#C8C8C8</Color>
+    <Color x:Key="Gray300">#ACACAC</Color>
+    <Color x:Key="Gray400">#919191</Color>
+    <Color x:Key="Gray500">#6E6E6E</Color>
+    <Color x:Key="Gray600">#404040</Color>
+    <Color x:Key="Gray900">#212121</Color>
+    <Color x:Key="Gray950">#141414</Color>
+
+    <!-- ================================ -->
+    <!-- FONDOS                           -->
+    <!-- ================================ -->
+    <Color x:Key="FondoPagina">#F0EEFF</Color>
+    <Color x:Key="FondoCard">#FFFFFF</Color>
+    <Color x:Key="FondoEntry">#F5F3FF</Color>
+    <Color x:Key="FondoBadge">#EDE9FE</Color>
+    <Color x:Key="HeaderOverlay">#99000000</Color>
+
+    <!-- ================================ -->
+    <!-- TEXTOS                           -->
+    <!-- ================================ -->
+    <Color x:Key="TextoPrincipal">#1A1A2E</Color>
+    <Color x:Key="TextoSecundario">#6B7280</Color>
+    <Color x:Key="TextoPlaceholder">#9CA3AF</Color>
+    <Color x:Key="TextoTenue">#C4B5FD</Color>
+    <Color x:Key="TextoBlanco">#FFFFFF</Color>
+
+    <!-- ================================ -->
+    <!-- ACENTO PRINCIPAL MORADO          -->
+    <!-- ================================ -->
+    <Color x:Key="ColorPrimario">#6C63FF</Color>
+    <Color x:Key="ColorPrimarioClaro">#EDE9FE</Color>
+    <Color x:Key="ColorPrimarioOscuro">#4F46E5</Color>
+
+    <!-- ================================ -->
+    <!-- BOTONES                          -->
+    <!-- ================================ -->
+    <Color x:Key="ColorAgregar">#6C63FF</Color>
+    <Color x:Key="ColorPendiente">#F97316</Color>
+    <Color x:Key="ColorCompletada">#10B981</Color>
+
+    <!-- ================================ -->
+    <!-- CONTADORES                       -->
+    <!-- ================================ -->
+    <Color x:Key="ColorTotal">#6C63FF</Color>
+    <Color x:Key="ColorResumenPendiente">#F97316</Color>
+    <Color x:Key="ColorResumenCompletada">#10B981</Color>
+
+    <!-- ================================ -->
+    <!-- FONDOS CONTADORES                -->
+    <!-- ================================ -->
+    <Color x:Key="ColorTotalBg">#EDE9FE</Color>
+    <Color x:Key="ColorPendienteBg">#FFF7ED</Color>
+    <Color x:Key="ColorCompletadaBg">#ECFDF5</Color>
+
+    <!-- ================================ -->
+    <!-- EXTRAS                           -->
+    <!-- ================================ -->
+    <Color x:Key="ColorSeparador">#E5E7EB</Color>
+    <Color x:Key="ColorPrioridad">#F97316</Color>
+    <Color x:Key="ColorCheckbox">#6C63FF</Color>
+
+</ResourceDictionary>

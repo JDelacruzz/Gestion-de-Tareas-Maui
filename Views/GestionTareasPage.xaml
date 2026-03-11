@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Gestion_de_Tareas.Views.GestionTareasPage"
+             Title=""
+             BackgroundColor="{StaticResource FondoPagina}">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+            <Style x:Key="EntryStyle" TargetType="Entry">
+                <Setter Property="BackgroundColor" Value="{StaticResource FondoEntry}"/>
+                <Setter Property="TextColor" Value="{StaticResource TextoPrincipal}"/>
+                <Setter Property="PlaceholderColor" Value="{StaticResource TextoPlaceholder}"/>
+                <Setter Property="FontSize" Value="15"/>
+                <Setter Property="HeightRequest" Value="50"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            </Style>
+
+            <Style x:Key="BtnBase" TargetType="Button">
+                <Setter Property="FontSize" Value="13"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="CornerRadius" Value="12"/>
+                <Setter Property="HeightRequest" Value="48"/>
+                <Setter Property="TextColor" Value="{StaticResource White}"/>
+                <Setter Property="HorizontalOptions" Value="Fill"/>
+            </Style>
+
+            <Style x:Key="BtnAgregar" TargetType="Button" BasedOn="{StaticResource BtnBase}">
+                <Setter Property="BackgroundColor" Value="{StaticResource ColorAgregar}"/>
+            </Style>
+
+            <Style x:Key="CardTarea" TargetType="Border">
+                <Setter Property="BackgroundColor" Value="{StaticResource FondoCard}"/>
+                <Setter Property="StrokeShape" Value="RoundRectangle 16"/>
+                <Setter Property="Stroke" Value="{StaticResource ColorSeparador}"/>
+                <Setter Property="Padding" Value="14"/>
+                <Setter Property="Margin" Value="0,4"/>
+            </Style>
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <StackLayout Orientation="Vertical" Spacing="0">
+
+            <!-- ======================== -->
+            <!-- HEADER MORADO            -->
+            <!-- ======================== -->
+            <Grid HeightRequest="200">
+
+                <!-- Fondo degradado simulado con dos BoxView -->
+                <BoxView BackgroundColor="{StaticResource ColorPrimarioOscuro}"
+                         HorizontalOptions="Fill"
+                         VerticalOptions="Fill"/>
+                <BoxView BackgroundColor="{StaticResource ColorPrimario}"
+                         Opacity="0.6"
+                         HorizontalOptions="Fill"
+                         VerticalOptions="Fill"/>
+
+                <StackLayout Orientation="Vertical"
+                             Spacing="6"
+                             VerticalOptions="Center"
+                             Padding="20">
+                    <Label Text="Buen día!"
+                           FontSize="16"
+                           TextColor="{StaticResource TextoBlanco}"
+                           Opacity="0.8"/>
+                    <Label Text="Gestión de Tareas"
+                           FontSize="28"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource TextoBlanco}"/>
+                    <Label Text="Organizá tu día de forma simple"
+                           FontSize="13"
+                           TextColor="{StaticResource TextoBlanco}"
+                           Opacity="0.7"/>
+                </StackLayout>
+
+            </Grid>
+
+            <!-- ======================== -->
+            <!-- TARJETA FLOTANTE         -->
+            <!-- Entry + Botón agregar    -->
+            <!-- ======================== -->
+            <Border BackgroundColor="{StaticResource FondoCard}"
+                    StrokeShape="RoundRectangle 20"
+                    Stroke="{StaticResource ColorSeparador}"
+                    Padding="16"
+                    Margin="16,-30,16,0">
+                <StackLayout Spacing="12">
+
+                    <Label Text="Nueva Tarea"
+                           FontSize="16"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource TextoPrincipal}"/>
+
+                    <Entry x:Name="EntryNombreTarea"
+                           Placeholder="Escribe el nombre de la tarea..."
+                           Style="{StaticResource EntryStyle}"/>
+
+                    <Button x:Name="BtnAgregarTarea"
+                            Text="+ Agregar Tarea"
+                            Style="{StaticResource BtnAgregar}"
+                            HeightRequest="52"
+                            FontSize="15"/>
+                </StackLayout>
+            </Border>
+
+            <!-- ======================== -->
+            <!-- CONTENIDO               -->
+            <!-- ======================== -->
+            <StackLayout Orientation="Vertical"
+                         Spacing="14"
+                         Padding="16,20,16,16">
+
+                <!-- ========================== -->
+                <!-- GRID 3 filas x 1 columna   -->
+                <!-- Contadores resumen         -->
+                <!-- ========================== -->
+                <Label Text="Resumen"
+                       FontSize="17"
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource TextoPrincipal}"/>
+
+                <Grid RowDefinitions="Auto,Auto,Auto"
+                      ColumnDefinitions="*"
+                      RowSpacing="10">
+
+                    <!-- Fila 0: Total -->
+                    <Border Grid.Row="0"
+                            BackgroundColor="{StaticResource ColorTotalBg}"
+                            StrokeShape="RoundRectangle 14"
+                            Stroke="{StaticResource ColorTotal}"
+                            Padding="16,14">
+                        <StackLayout Orientation="Horizontal"
+                                     HorizontalOptions="Center"
+                                     VerticalOptions="Center"
+                                     Spacing="10">
+                            <BoxView BackgroundColor="{StaticResource ColorTotal}"
+                                     WidthRequest="4"
+                                     HeightRequest="30"
+                                     CornerRadius="2"/>
+                            <Label Text="Total de tareas:"
+                                   FontSize="14"
+                                   TextColor="{StaticResource TextoSecundario}"
+                                   VerticalTextAlignment="Center"/>
+                            <Label x:Name="LblTotalTareas"
+                                   Text="5"
+                                   TextColor="{StaticResource ColorTotal}"
+                                   FontSize="24"
+                                   FontAttributes="Bold"
+                                   VerticalTextAlignment="Center"/>
+                        </StackLayout>
+                    </Border>
+
+                    <!-- Fila 1: Pendientes -->
+                    <Border Grid.Row="1"
+                            BackgroundColor="{StaticResource ColorPendienteBg}"
+                            StrokeShape="RoundRectangle 14"
+                            Stroke="{StaticResource ColorResumenPendiente}"
+                            Padding="16,14">
+                        <StackLayout Orientation="Horizontal"
+                                     HorizontalOptions="Center"
+                                     VerticalOptions="Center"
+                                     Spacing="10">
+                            <BoxView BackgroundColor="{StaticResource ColorResumenPendiente}"
+                                     WidthRequest="4"
+                                     HeightRequest="30"
+                                     CornerRadius="2"/>
+                            <Label Text="Pendientes:"
+                                   FontSize="14"
+                                   TextColor="{StaticResource TextoSecundario}"
+                                   VerticalTextAlignment="Center"/>
+                            <Label x:Name="LblTareasPendientes"
+                                   Text="3"
+                                   TextColor="{StaticResource ColorResumenPendiente}"
+                                   FontSize="24"
+                                   FontAttributes="Bold"
+                                   VerticalTextAlignment="Center"/>
+                        </StackLayout>
+                    </Border>
+
+                    <!-- Fila 2: Completadas -->
+                    <Border Grid.Row="2"
+                            BackgroundColor="{StaticResource ColorCompletadaBg}"
+                            StrokeShape="RoundRectangle 14"
+                            Stroke="{StaticResource ColorResumenCompletada}"
+                            Padding="16,14">
+                        <StackLayout Orientation="Horizontal"
+                                     HorizontalOptions="Center"
+                                     VerticalOptions="Center"
+                                     Spacing="10">
+                            <BoxView BackgroundColor="{StaticResource ColorResumenCompletada}"
+                                     WidthRequest="4"
+                                     HeightRequest="30"
+                                     CornerRadius="2"/>
+                            <Label Text="Completadas:"
+                                   FontSize="14"
+                                   TextColor="{StaticResource TextoSecundario}"
+                                   VerticalTextAlignment="Center"/>
+                            <Label x:Name="LblTareasCompletadas"
+                                   Text="2"
+                                   TextColor="{StaticResource ColorResumenCompletada}"
+                                   FontSize="24"
+                                   FontAttributes="Bold"
+                                   VerticalTextAlignment="Center"/>
+                        </StackLayout>
+                    </Border>
+
+                </Grid>
+
+                <!-- Separador -->
+                <BoxView HeightRequest="1"
+                         Color="{StaticResource ColorSeparador}"
+                         HorizontalOptions="Fill"
+                         Margin="0,4"/>
+
+                <Label Text="Lista de Tareas"
+                       FontSize="17"
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource TextoPrincipal}"/>
+
+                <!-- ======================== -->
+                <!-- LISTA DE TAREAS          -->
+                <!-- ======================== -->
+                <CollectionView x:Name="ListaTareas"
+                                SelectionMode="None">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border Style="{StaticResource CardTarea}"
+                                    Margin="0,4">
+                                <Grid ColumnDefinitions="Auto,*,Auto"
+                                      RowDefinitions="Auto,Auto,Auto"
+                                      ColumnSpacing="12"
+                                      RowSpacing="4">
+
+                                    <CheckBox Grid.Column="0"
+                                              Grid.RowSpan="3"
+                                              Color="{StaticResource ColorCheckbox}"
+                                              VerticalOptions="Center"/>
+
+                                    <Label Grid.Column="1" Grid.Row="0"
+                                           Text="{Binding Nombre}"
+                                           TextColor="{StaticResource TextoPrincipal}"
+                                           FontSize="15"
+                                           FontAttributes="Bold"
+                                           LineBreakMode="TailTruncation"/>
+
+                                    <Label Grid.Column="1" Grid.Row="1"
+                                           Text="{Binding Descripcion}"
+                                           TextColor="{StaticResource TextoSecundario}"
+                                           FontSize="12"
+                                           LineBreakMode="TailTruncation"/>
+
+                                    <FlexLayout Grid.Column="1" Grid.Row="2"
+                                                Direction="Row">
+                                        <Label Text="{Binding Fecha, StringFormat='{0:dd/MM/yyyy}'}"
+                                               TextColor="{StaticResource TextoTenue}"
+                                               FontSize="11"
+                                               Margin="0,0,8,0"/>
+                                        <Label Text="{Binding Prioridad}"
+                                               TextColor="{StaticResource ColorPrioridad}"
+                                               FontSize="11"
+                                               FontAttributes="Bold"/>
+                                    </FlexLayout>
+
+                                    <Border Grid.Column="2"
+                                            Grid.RowSpan="3"
+                                            BackgroundColor="{StaticResource FondoBadge}"
+                                            StrokeShape="RoundRectangle 8"
+                                            Stroke="{StaticResource ColorPrimarioClaro}"
+                                            Padding="8,4"
+                                            VerticalOptions="Center">
+                                        <Label Text="{Binding Estado}"
+                                               TextColor="{StaticResource ColorPrimario}"
+                                               FontSize="10"
+                                               FontAttributes="Bold"
+                                               HorizontalTextAlignment="Center"
+                                               WidthRequest="72"/>
+                                    </Border>
+
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+
+</ContentPage>

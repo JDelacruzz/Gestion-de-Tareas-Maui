@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="Gestion_de_Tareas.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:views="clr-namespace:Gestion_de_Tareas.Views"
+    Shell.TabBarBackgroundColor="{StaticResource FondoCard}"
+    Shell.TabBarForegroundColor="{StaticResource ColorPrimario}"
+    Shell.TabBarUnselectedColor="{StaticResource TextoSecundario}"
+    Shell.TabBarTitleColor="{StaticResource ColorPrimario}">
+
+    <TabBar>
+
+        <ShellContent
+            Title="Inicio"
+            Icon="home.png"
+            ContentTemplate="{DataTemplate views:GestionTareasPage}"
+            Route="GestionTareasPage"/>
+
+        <ShellContent
+            Title="Total"
+            Icon="list.png"
+            ContentTemplate="{DataTemplate views:TotalTareas}"
+            Route="TotalTareas"/>
+
+        <ShellContent
+            Title="Pendientes"
+            Icon="clock_five.png"
+            ContentTemplate="{DataTemplate views:TareasPendientes}"
+            Route="TareasPendientes"/>
+
+        <ShellContent
+            Title="Completadas"
+            Icon="check_circle.png"
+            ContentTemplate="{DataTemplate views:TareasCompletadas}"
+            Route="TareasCompletadas"/>
+
+    </TabBar>
+
+</Shell>
