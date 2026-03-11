@@ -68,10 +68,12 @@
                            Opacity="0.8"/>
                     <Label Text="Gestión de Tareas"
                            FontSize="28"
+                           FontFamily="EBGaramondBold"
                            FontAttributes="Bold"
                            TextColor="{StaticResource TextoBlanco}"/>
                     <Label Text="Organizá tu día de forma simple"
                            FontSize="13"
+                           FontFamily="EBGaramondItalic"
                            TextColor="{StaticResource TextoBlanco}"
                            Opacity="0.7"/>
                 </StackLayout>

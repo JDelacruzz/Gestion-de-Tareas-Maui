@@ -31,18 +31,20 @@
                              Padding="20">
 
                     <!-- Logo -->
-                    <Image Source="logo_morado.png"
-                           HeightRequest="100"
-                           WidthRequest="100"
+                    <Image Source="logo_morado_sinfondo.png"
+                           HeightRequest="200"
+                           WidthRequest="500"
                            HorizontalOptions="Center"/>
 
-                    <Label Text="Gestión de Tareas"
+                    <Label Text="Listly"
+                           FontFamily="EBGaramondBold"
                            FontSize="26"
                            FontAttributes="Bold"
                            TextColor="{StaticResource White}"
                            HorizontalTextAlignment="Center"/>
 
                     <Label Text="Organizá tu día de forma simple"
+                           FontFamily="EBGaramondItalic"
                            FontSize="13"
                            TextColor="{StaticResource White}"
                            Opacity="0.75"
