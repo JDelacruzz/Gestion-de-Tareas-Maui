@@ -37,14 +37,14 @@
                            HorizontalOptions="Center"/>
 
                     <Label Text="Listly"
-                           FontFamily="EBGaramondBold"
+                           FontFamily="LexendBold"
                            FontSize="26"
                            FontAttributes="Bold"
                            TextColor="{StaticResource White}"
                            HorizontalTextAlignment="Center"/>
 
                     <Label Text="Organizá tu día de forma simple"
-                           FontFamily="EBGaramondItalic"
+                           FontFamily="LexendItalic"
                            FontSize="13"
                            TextColor="{StaticResource White}"
                            Opacity="0.75"
@@ -66,12 +66,14 @@
 
                     <Label Text="Iniciar Sesión"
                            FontSize="20"
+                           FontFamily="LexendRegular"
                            FontAttributes="Bold"
                            TextColor="{StaticResource TextoPrincipal}"
                            HorizontalTextAlignment="Center"/>
 
                     <Label Text="Bienvenido de vuelta 👋"
                            FontSize="13"
+                           FontFamily="LexendRegular"
                            TextColor="{StaticResource TextoSecundario}"
                            HorizontalTextAlignment="Center"
                            Margin="0,0,0,8"/>
@@ -80,6 +82,7 @@
                     <StackLayout Spacing="6">
                         <Label Text="Usuario"
                                FontSize="13"
+                               FontFamily="LexendRegular"
                                FontAttributes="Bold"
                                TextColor="{StaticResource TextoPrincipal}"/>
                         <Border BackgroundColor="{StaticResource FondoEntry}"
@@ -91,6 +94,7 @@
                                    PlaceholderColor="{StaticResource TextoPlaceholder}"
                                    TextColor="{StaticResource TextoPrincipal}"
                                    BackgroundColor="Transparent"
+                                   FontFamily="LexendLight"
                                    FontSize="14"
                                    HeightRequest="44"/>
                         </Border>
@@ -100,6 +104,7 @@
                     <StackLayout Spacing="6">
                         <Label Text="Contraseña"
                                FontSize="13"
+                               FontFamily="LexendRegular"aww
                                FontAttributes="Bold"
                                TextColor="{StaticResource TextoPrincipal}"/>
                         <Border BackgroundColor="{StaticResource FondoEntry}"
@@ -113,6 +118,7 @@
                                    BackgroundColor="Transparent"
                                    IsPassword="True"
                                    FontSize="14"
+                                   FontFamily="LexendLight"
                                    HeightRequest="44"/>
                         </Border>
                     </StackLayout>
