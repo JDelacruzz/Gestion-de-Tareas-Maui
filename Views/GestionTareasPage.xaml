@@ -48,8 +48,6 @@
             <!-- HEADER MORADO            -->
             <!-- ======================== -->
             <Grid HeightRequest="200">
-
-                <!-- Fondo degradado simulado con dos BoxView -->
                 <BoxView BackgroundColor="{StaticResource ColorPrimarioOscuro}"
                          HorizontalOptions="Fill"
                          VerticalOptions="Fill"/>
@@ -57,7 +55,6 @@
                          Opacity="0.6"
                          HorizontalOptions="Fill"
                          VerticalOptions="Fill"/>
-
                 <StackLayout Orientation="Vertical"
                              Spacing="6"
                              VerticalOptions="Center"
@@ -68,19 +65,19 @@
                            Opacity="0.8"/>
                     <Label Text="Gestión de Tareas"
                            FontSize="28"
+                           FontFamily="EBGaramondBold"
                            FontAttributes="Bold"
                            TextColor="{StaticResource TextoBlanco}"/>
                     <Label Text="Organizá tu día de forma simple"
                            FontSize="13"
+                           FontFamily="EBGaramondItalic"
                            TextColor="{StaticResource TextoBlanco}"
                            Opacity="0.7"/>
                 </StackLayout>
-
             </Grid>
 
             <!-- ======================== -->
             <!-- TARJETA FLOTANTE         -->
-            <!-- Entry + Botón agregar    -->
             <!-- ======================== -->
             <Border BackgroundColor="{StaticResource FondoCard}"
                     StrokeShape="RoundRectangle 20"
@@ -88,18 +85,17 @@
                     Padding="16"
                     Margin="16,-30,16,0">
                 <StackLayout Spacing="12">
-
                     <Label Text="Nueva Tarea"
                            FontSize="16"
                            FontAttributes="Bold"
                            TextColor="{StaticResource TextoPrincipal}"/>
-
                     <Entry x:Name="EntryNombreTarea"
+                           Text="{Binding NuevoNombre, Mode=TwoWay}"
                            Placeholder="Escribe el nombre de la tarea..."
                            Style="{StaticResource EntryStyle}"/>
-
                     <Button x:Name="BtnAgregarTarea"
                             Text="+ Agregar Tarea"
+                            Command="{Binding AgregarTareaCommand}"
                             Style="{StaticResource BtnAgregar}"
                             HeightRequest="52"
                             FontSize="15"/>
@@ -113,10 +109,6 @@
                          Spacing="14"
                          Padding="16,20,16,16">
 
-                <!-- ========================== -->
-                <!-- GRID 3 filas x 1 columna   -->
-                <!-- Contadores resumen         -->
-                <!-- ========================== -->
                 <Label Text="Resumen"
                        FontSize="17"
                        FontAttributes="Bold"
@@ -137,18 +129,15 @@
                                      VerticalOptions="Center"
                                      Spacing="10">
                             <BoxView BackgroundColor="{StaticResource ColorTotal}"
-                                     WidthRequest="4"
-                                     HeightRequest="30"
-                                     CornerRadius="2"/>
+                                     WidthRequest="4" HeightRequest="30" CornerRadius="2"/>
                             <Label Text="Total de tareas:"
                                    FontSize="14"
                                    TextColor="{StaticResource TextoSecundario}"
                                    VerticalTextAlignment="Center"/>
                             <Label x:Name="LblTotalTareas"
-                                   Text="5"
+                                   Text="{Binding TotalTareas}"
                                    TextColor="{StaticResource ColorTotal}"
-                                   FontSize="24"
-                                   FontAttributes="Bold"
+                                   FontSize="24" FontAttributes="Bold"
                                    VerticalTextAlignment="Center"/>
                         </StackLayout>
                     </Border>
@@ -164,18 +153,15 @@
                                      VerticalOptions="Center"
                                      Spacing="10">
                             <BoxView BackgroundColor="{StaticResource ColorResumenPendiente}"
-                                     WidthRequest="4"
-                                     HeightRequest="30"
-                                     CornerRadius="2"/>
+                                     WidthRequest="4" HeightRequest="30" CornerRadius="2"/>
                             <Label Text="Pendientes:"
                                    FontSize="14"
                                    TextColor="{StaticResource TextoSecundario}"
                                    VerticalTextAlignment="Center"/>
                             <Label x:Name="LblTareasPendientes"
-                                   Text="3"
+                                   Text="{Binding TareasPendientes}"
                                    TextColor="{StaticResource ColorResumenPendiente}"
-                                   FontSize="24"
-                                   FontAttributes="Bold"
+                                   FontSize="24" FontAttributes="Bold"
                                    VerticalTextAlignment="Center"/>
                         </StackLayout>
                     </Border>
@@ -191,18 +177,15 @@
                                      VerticalOptions="Center"
                                      Spacing="10">
                             <BoxView BackgroundColor="{StaticResource ColorResumenCompletada}"
-                                     WidthRequest="4"
-                                     HeightRequest="30"
-                                     CornerRadius="2"/>
+                                     WidthRequest="4" HeightRequest="30" CornerRadius="2"/>
                             <Label Text="Completadas:"
                                    FontSize="14"
                                    TextColor="{StaticResource TextoSecundario}"
                                    VerticalTextAlignment="Center"/>
                             <Label x:Name="LblTareasCompletadas"
-                                   Text="2"
+                                   Text="{Binding TareasCompletadas}"
                                    TextColor="{StaticResource ColorResumenCompletada}"
-                                   FontSize="24"
-                                   FontAttributes="Bold"
+                                   FontSize="24" FontAttributes="Bold"
                                    VerticalTextAlignment="Center"/>
                         </StackLayout>
                     </Border>
@@ -222,28 +205,30 @@
 
                 <!-- ======================== -->
                 <!-- LISTA DE TAREAS          -->
+                <!-- 🆕 ItemsSource conectado -->
                 <!-- ======================== -->
                 <CollectionView x:Name="ListaTareas"
+                                ItemsSource="{Binding Tareas}"
                                 SelectionMode="None">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <Border Style="{StaticResource CardTarea}"
-                                    Margin="0,4">
-                                <Grid ColumnDefinitions="Auto,*,Auto"
+                            <Border Style="{StaticResource CardTarea}" Margin="0,4">
+                                <Grid ColumnDefinitions="Auto,*,Auto,Auto"
                                       RowDefinitions="Auto,Auto,Auto"
                                       ColumnSpacing="12"
                                       RowSpacing="4">
 
+                                    <!-- 🆕 IsChecked conectado + comando marcar -->
                                     <CheckBox Grid.Column="0"
                                               Grid.RowSpan="3"
+                                              IsChecked="{Binding Completada, Mode=TwoWay}"
                                               Color="{StaticResource ColorCheckbox}"
                                               VerticalOptions="Center"/>
 
                                     <Label Grid.Column="1" Grid.Row="0"
                                            Text="{Binding Nombre}"
                                            TextColor="{StaticResource TextoPrincipal}"
-                                           FontSize="15"
-                                           FontAttributes="Bold"
+                                           FontSize="15" FontAttributes="Bold"
                                            LineBreakMode="TailTruncation"/>
 
                                     <Label Grid.Column="1" Grid.Row="1"
@@ -252,18 +237,16 @@
                                            FontSize="12"
                                            LineBreakMode="TailTruncation"/>
 
-                                    <FlexLayout Grid.Column="1" Grid.Row="2"
-                                                Direction="Row">
+                                    <FlexLayout Grid.Column="1" Grid.Row="2" Direction="Row">
                                         <Label Text="{Binding Fecha, StringFormat='{0:dd/MM/yyyy}'}"
                                                TextColor="{StaticResource TextoTenue}"
-                                               FontSize="11"
-                                               Margin="0,0,8,0"/>
+                                               FontSize="11" Margin="0,0,8,0"/>
                                         <Label Text="{Binding Prioridad}"
                                                TextColor="{StaticResource ColorPrioridad}"
-                                               FontSize="11"
-                                               FontAttributes="Bold"/>
+                                               FontSize="11" FontAttributes="Bold"/>
                                     </FlexLayout>
 
+                                    <!-- Badge Estado -->
                                     <Border Grid.Column="2"
                                             Grid.RowSpan="3"
                                             BackgroundColor="{StaticResource FondoBadge}"
@@ -273,11 +256,24 @@
                                             VerticalOptions="Center">
                                         <Label Text="{Binding Estado}"
                                                TextColor="{StaticResource ColorPrimario}"
-                                               FontSize="10"
-                                               FontAttributes="Bold"
+                                               FontSize="10" FontAttributes="Bold"
                                                HorizontalTextAlignment="Center"
                                                WidthRequest="72"/>
                                     </Border>
+
+                                    <!-- 🆕 Botón eliminar -->
+                                    <Button Grid.Column="3"
+                                            Grid.RowSpan="3"
+                                            Text="🗑"
+                                            FontSize="16"
+                                            BackgroundColor="Transparent"
+                                            TextColor="#E53935"
+                                            WidthRequest="40"
+                                            HeightRequest="40"
+                                            Padding="0"
+                                            VerticalOptions="Center"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.EliminarTareaCommand}"
+                                            CommandParameter="{Binding .}"/>
 
                                 </Grid>
                             </Border>
