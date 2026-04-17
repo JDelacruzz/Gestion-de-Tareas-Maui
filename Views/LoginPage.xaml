@@ -104,7 +104,7 @@
                     <StackLayout Spacing="6">
                         <Label Text="Contraseña"
                                FontSize="13"
-                               FontFamily="LexendRegular"aww
+                               FontFamily="LexendRegular"
                                FontAttributes="Bold"
                                TextColor="{StaticResource TextoPrincipal}"/>
                         <Border BackgroundColor="{StaticResource FondoEntry}"
