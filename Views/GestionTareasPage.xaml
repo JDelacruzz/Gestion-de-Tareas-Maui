@@ -5,6 +5,9 @@
              Title=""
              BackgroundColor="{StaticResource FondoPagina}">
 
+
+    <Shell.NavBarIsVisible>True</Shell.NavBarIsVisible>
+
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style x:Key="EntryStyle" TargetType="Entry">
@@ -67,12 +70,10 @@
                     <Label Text="Nueva Tarea" FontSize="16" FontAttributes="Bold"
                            TextColor="{StaticResource TextoPrincipal}"/>
 
-                    <!-- Nombre -->
                     <Entry Text="{Binding NuevoNombre, Mode=TwoWay}"
                            Placeholder="Nombre de la tarea..."
                            Style="{StaticResource EntryStyle}"/>
 
-                    <!-- 🆕 Descripción -->
                     <Border BackgroundColor="{StaticResource FondoEntry}"
                             StrokeShape="RoundRectangle 10"
                             Stroke="{StaticResource ColorSeparador}"
@@ -85,7 +86,6 @@
                                 AutoSize="Disabled"/>
                     </Border>
 
-                    <!-- 🆕 Prioridad -->
                     <Border BackgroundColor="{StaticResource FondoEntry}"
                             StrokeShape="RoundRectangle 10"
                             Stroke="{StaticResource ColorSeparador}"
@@ -172,13 +172,10 @@
                 <Label Text="Lista de Tareas" FontSize="17" FontAttributes="Bold"
                        TextColor="{StaticResource TextoPrincipal}"/>
 
-                <!-- LISTA -->
                 <CollectionView ItemsSource="{Binding Tareas}" SelectionMode="None">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <Border Style="{StaticResource CardTarea}" Margin="0,4">
-
-                                <!-- 🆕 Tap en la card abre el detalle -->
                                 <Border.GestureRecognizers>
                                     <TapGestureRecognizer
                                         Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.AbrirDetalleCommand}"
@@ -209,7 +206,6 @@
                                                FontSize="11" FontAttributes="Bold"/>
                                     </FlexLayout>
 
-                                    <!-- Badge Estado táctil -->
                                     <Border Grid.Column="1" Grid.RowSpan="3"
                                             BackgroundColor="{Binding ColorEstado}"
                                             StrokeShape="RoundRectangle 20"
@@ -225,7 +221,6 @@
                                                HorizontalTextAlignment="Center"/>
                                     </Border>
 
-                                    <!-- Botón eliminar -->
                                     <Button Grid.Column="2" Grid.RowSpan="3"
                                             Text="🗑" FontSize="16"
                                             BackgroundColor="Transparent" TextColor="#E53935"

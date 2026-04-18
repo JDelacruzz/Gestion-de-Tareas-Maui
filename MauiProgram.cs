@@ -1,6 +1,6 @@
 ﻿using Gestion_de_Tareas.Data;
-using Gestion_de_Tareas.Views;
 using Gestion_de_Tareas.ViewModels;
+using Gestion_de_Tareas.Views;
 using Microsoft.Extensions.Logging;
 
 namespace Gestion_de_Tareas
