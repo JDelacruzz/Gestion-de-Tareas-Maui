@@ -21,7 +21,33 @@ public partial class DetalleTareaPage : ContentPage
         EntryNombre.Text = _tarea.Nombre;
         EditorDescripcion.Text = _tarea.Descripcion;
         PickerPrioridad.SelectedItem = _tarea.Prioridad;
-        DatePickerFecha.Date = (DateTime)_tarea.Fecha; // ✅
+        DatePickerFecha.Date = (DateTime)_tarea.Fecha;
+
+        ActualizarBadgeEstado();
+    }
+
+    // 🆕 Toca el badge → cambia el estado visualmente
+    private void OnEstadoTapped(object sender, TappedEventArgs e)
+    {
+        _tarea.Completada = !_tarea.Completada;
+        ActualizarBadgeEstado();
+    }
+
+    // 🆕 Actualiza color, ícono y texto del badge
+    private void ActualizarBadgeEstado()
+    {
+        if (_tarea.Completada)
+        {
+            BadgeEstado.BackgroundColor = Color.FromArgb("#4CAF50"); // verde
+            LblEstado.Text = "Completada";
+            IconoEstado.Text = "✅";
+        }
+        else
+        {
+            BadgeEstado.BackgroundColor = Color.FromArgb("#9C27B0"); // morado
+            LblEstado.Text = "Pendiente";
+            IconoEstado.Text = "⏳";
+        }
     }
 
     private async void BtnGuardar_Clicked(object sender, EventArgs e)
@@ -35,7 +61,8 @@ public partial class DetalleTareaPage : ContentPage
         _tarea.Nombre = EntryNombre.Text.Trim();
         _tarea.Descripcion = EditorDescripcion.Text?.Trim() ?? string.Empty;
         _tarea.Prioridad = PickerPrioridad.SelectedItem?.ToString() ?? "Media";
-        _tarea.Fecha = (DateTime)DatePickerFecha.Date; // ✅
+        _tarea.Fecha = (DateTime)DatePickerFecha.Date;
+        // _tarea.Completada ya fue actualizado por OnEstadoTapped
 
         _vm.ActualizarTareaCommand.Execute(_tarea);
 

@@ -2,45 +2,70 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Gestion_de_Tareas.Views.TareasCompletadas"
-             Title="Total de Tareas Completadas"
+             Title="Tareas Completadas"
              BackgroundColor="{StaticResource FondoPagina}">
 
     <StackLayout Padding="16" Spacing="16">
 
         <Label Text="Tareas Completadas"
-               FontSize="22"
-               FontAttributes="Bold"
-               TextColor="{StaticResource ColorTotal}"
+               FontSize="22" FontAttributes="Bold"
+               TextColor="{StaticResource ColorResumenCompletada}"
                HorizontalTextAlignment="Center"
                Margin="0,16,0,0"/>
 
-        <CollectionView x:Name="ListaTareasCompletadas"
-                        SelectionMode="None">
+        <CollectionView x:Name="ListaTareasCompletadas" SelectionMode="None">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Border BackgroundColor="{StaticResource FondoCard}"
-                            StrokeShape="RoundRectangle 12"
+                            StrokeShape="RoundRectangle 16"
                             Stroke="{StaticResource ColorSeparador}"
-                            Padding="14"
-                            Margin="0,4">
-                        <StackLayout Spacing="4">
-                            <Label Text="{Binding Nombre}"
-                                   FontSize="15"
-                                   FontAttributes="Bold"
-                                   TextColor="{StaticResource TextoPrincipal}"/>
-                            <Label Text="{Binding Descripcion}"
+                            Padding="14" Margin="0,4">
+
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnTareaTapped"/>
+                        </Border.GestureRecognizers>
+
+                        <Grid ColumnDefinitions="*,Auto"
+                              RowDefinitions="Auto,Auto,Auto"
+                              ColumnSpacing="12" RowSpacing="4">
+
+                            <Label Grid.Column="0" Grid.Row="0"
+                                   Text="{Binding Nombre}"
+                                   FontSize="15" FontAttributes="Bold"
+                                   TextColor="{StaticResource TextoPrincipal}"
+                                   LineBreakMode="TailTruncation"/>
+
+                            <Label Grid.Column="0" Grid.Row="1"
+                                   Text="{Binding Descripcion}"
                                    FontSize="12"
-                                   TextColor="{StaticResource TextoSecundario}"/>
-                            <Label Text="{Binding Estado}"
-                                   FontSize="12"
-                                   FontAttributes="Bold"
-                                   TextColor="{StaticResource ColorTotal}"/>
-                        </StackLayout>
+                                   TextColor="{StaticResource TextoSecundario}"
+                                   LineBreakMode="TailTruncation"/>
+
+                            <FlexLayout Grid.Column="0" Grid.Row="2" Direction="Row">
+                                <Label Text="{Binding Fecha, StringFormat='{}{0:dd/MM/yyyy}'}"
+                                       TextColor="{StaticResource TextoTenue}"
+                                       FontSize="11" Margin="0,0,8,0"/>
+                                <Label Text="{Binding Prioridad}"
+                                       TextColor="{StaticResource ColorPrioridad}"
+                                       FontSize="11" FontAttributes="Bold"/>
+                            </FlexLayout>
+
+                            <Border Grid.Column="1" Grid.RowSpan="3"
+                                    BackgroundColor="{Binding ColorEstado}"
+                                    StrokeShape="RoundRectangle 20"
+                                    Stroke="Transparent"
+                                    Padding="10,6" VerticalOptions="Center">
+                                <Label Text="{Binding Estado}"
+                                       TextColor="White"
+                                       FontSize="11" FontAttributes="Bold"
+                                       HorizontalTextAlignment="Center"/>
+                            </Border>
+
+                        </Grid>
                     </Border>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
 
     </StackLayout>
-
 </ContentPage>

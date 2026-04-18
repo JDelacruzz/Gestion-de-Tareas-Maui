@@ -1,3 +1,4 @@
+using Gestion_de_Tareas.Models;
 using Gestion_de_Tareas.ViewModels;
 
 namespace Gestion_de_Tareas.Views;
@@ -15,9 +16,18 @@ public partial class TareasCompletadas : ContentPage
     protected override void OnAppearing()
     {
         base.OnAppearing();
-        // Filtra solo las completadas cada vez que entra
+        // Solo completadas, refresca cada vez que entrás
         ListaTareasCompletadas.ItemsSource = _vm.Tareas
             .Where(t => t.Completada)
             .ToList();
+    }
+
+    private async void OnTareaTapped(object sender, TappedEventArgs e)
+    {
+        if (sender is Border border && border.BindingContext is Tarea tarea)
+        {
+            var detalle = new DetalleTareaPage(_vm, tarea);
+            await Navigation.PushAsync(detalle);
+        }
     }
 }

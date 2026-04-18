@@ -1,3 +1,4 @@
+using Gestion_de_Tareas.Models;
 using Gestion_de_Tareas.ViewModels;
 
 namespace Gestion_de_Tareas.Views;
@@ -10,15 +11,20 @@ public partial class TotalTareas : ContentPage
     {
         InitializeComponent();
         _vm = viewModel;
-        // Todas las tareas sin filtro
-        ListaTotalTareas.ItemsSource = _vm.Tareas;
     }
 
-    // Refresca cada vez que se entra a la página
     protected override void OnAppearing()
     {
         base.OnAppearing();
-        ListaTotalTareas.ItemsSource = null;
-        ListaTotalTareas.ItemsSource = _vm.Tareas;
+        ListaTotalTareas.ItemsSource = _vm.Tareas; 
+    }
+
+    private async void OnTareaTapped(object sender, TappedEventArgs e)
+    {
+        if (sender is Border border && border.BindingContext is Tarea tarea)
+        {
+            var detalle = new DetalleTareaPage(_vm, tarea);
+            await Navigation.PushAsync(detalle);
+        }
     }
 }

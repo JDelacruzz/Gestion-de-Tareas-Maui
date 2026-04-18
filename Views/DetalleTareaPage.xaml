@@ -12,7 +12,8 @@
                    TextColor="{StaticResource TextoPrincipal}" Margin="0,10,0,0"/>
 
             <!-- Nombre -->
-            <Label Text="Nombre" FontSize="13" TextColor="{StaticResource TextoSecundario}"/>
+            <Label Text="Nombre" FontSize="13"
+                   TextColor="{StaticResource TextoSecundario}"/>
             <Border BackgroundColor="{StaticResource FondoEntry}"
                     StrokeShape="RoundRectangle 10"
                     Stroke="{StaticResource ColorSeparador}" Padding="12,0">
@@ -23,7 +24,8 @@
             </Border>
 
             <!-- Descripción -->
-            <Label Text="Descripción" FontSize="13" TextColor="{StaticResource TextoSecundario}"/>
+            <Label Text="Descripción" FontSize="13"
+                   TextColor="{StaticResource TextoSecundario}"/>
             <Border BackgroundColor="{StaticResource FondoEntry}"
                     StrokeShape="RoundRectangle 10"
                     Stroke="{StaticResource ColorSeparador}" Padding="12,8">
@@ -35,7 +37,8 @@
             </Border>
 
             <!-- Prioridad -->
-            <Label Text="Prioridad" FontSize="13" TextColor="{StaticResource TextoSecundario}"/>
+            <Label Text="Prioridad" FontSize="13"
+                   TextColor="{StaticResource TextoSecundario}"/>
             <Border BackgroundColor="{StaticResource FondoEntry}"
                     StrokeShape="RoundRectangle 10"
                     Stroke="{StaticResource ColorSeparador}" Padding="12,0">
@@ -60,6 +63,33 @@
                 <DatePicker x:Name="DatePickerFecha"
                             TextColor="{StaticResource TextoPrincipal}"
                             FontSize="15" Format="dd/MM/yyyy"/>
+            </Border>
+
+            <!-- 🆕 Estado -->
+            <Label Text="Estado" FontSize="13"
+                   TextColor="{StaticResource TextoSecundario}"/>
+            <Border x:Name="BadgeEstado"
+                    StrokeShape="RoundRectangle 12"
+                    Stroke="Transparent"
+                    Padding="16,14"
+                    HorizontalOptions="Fill">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnEstadoTapped"/>
+                </Border.GestureRecognizers>
+                <StackLayout Orientation="Horizontal" Spacing="10">
+                    <Label x:Name="IconoEstado"
+                           FontSize="18"
+                           VerticalTextAlignment="Center"/>
+                    <StackLayout Spacing="2" VerticalOptions="Center">
+                        <Label x:Name="LblEstado"
+                               FontSize="15" FontAttributes="Bold"
+                               TextColor="White"/>
+                        <Label Text="Tocá para cambiar"
+                               FontSize="11"
+                               TextColor="White"
+                               Opacity="0.75"/>
+                    </StackLayout>
+                </StackLayout>
             </Border>
 
             <!-- Botón Guardar -->
