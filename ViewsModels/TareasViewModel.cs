@@ -11,15 +11,12 @@ namespace Gestion_de_Tareas.ViewModels
     {
         private readonly TareasDbContext _context;
 
-        // ── Lista observable → actualiza la UI automáticamente ──
         public ObservableCollection<Tarea> Tareas { get; set; } = new();
 
-        // ── Contadores para el resumen ──
         public int TotalTareas => Tareas.Count;
         public int TareasPendientes => Tareas.Count(t => !t.Completada);
         public int TareasCompletadas => Tareas.Count(t => t.Completada);
 
-        // ── Campos para nueva tarea ──
         private string _nuevoNombre = string.Empty;
         public string NuevoNombre
         {
@@ -46,36 +43,40 @@ namespace Gestion_de_Tareas.ViewModels
             set { _nuevaPrioridad = value; OnPropertyChanged(); }
         }
 
-        // ── Comandos ──
         public ICommand AgregarTareaCommand { get; }
         public ICommand EliminarTareaCommand { get; }
-        public ICommand MarcarCompletadaCommand { get; }
+        public ICommand ToggleEstadoCommand { get; }
+        public ICommand ActualizarTareaCommand { get; }
+        public ICommand AbrirDetalleCommand { get; }
 
         public TareasViewModel(TareasDbContext context)
         {
             _context = context;
-            _context.Database.EnsureCreated(); // Crea la BD si no existe
+            _context.Database.EnsureCreated();
 
             AgregarTareaCommand = new Command(AgregarTarea, PuedeAgregar);
             EliminarTareaCommand = new Command<Tarea>(EliminarTarea);
-            MarcarCompletadaCommand = new Command<Tarea>(MarcarCompletada);
+            ToggleEstadoCommand = new Command<Tarea>(ToggleEstado);
+            ActualizarTareaCommand = new Command<Tarea>(ActualizarTarea);
+
+            AbrirDetalleCommand = new Command<Tarea>(async (tarea) =>
+            {
+                var detalle = new Views.DetalleTareaPage(this, tarea);
+                await Shell.Current.Navigation.PushAsync(detalle);
+            });
 
             Tareas.CollectionChanged += (s, e) => ActualizarContadores();
-
             CargarTareas();
         }
 
-        // ── Cargar tareas desde SQLite ──
         private void CargarTareas()
         {
             Tareas.Clear();
-            foreach (var tarea in _context.Tareas.ToList())
-                Tareas.Add(tarea);
-
+            foreach (var t in _context.Tareas.ToList())
+                Tareas.Add(t);
             ActualizarContadores();
         }
 
-        // ── Agregar nueva tarea ──
         private void AgregarTarea()
         {
             var nueva = new Tarea
@@ -86,50 +87,35 @@ namespace Gestion_de_Tareas.ViewModels
                 Fecha = DateTime.Now.AddDays(1),
                 Completada = false
             };
-
             _context.Tareas.Add(nueva);
             _context.SaveChanges();
             Tareas.Add(nueva);
 
-            // Limpiar campos
             NuevoNombre = string.Empty;
             NuevaDescripcion = string.Empty;
             NuevaPrioridad = "Media";
-
             ActualizarContadores();
         }
 
         private bool PuedeAgregar() => !string.IsNullOrWhiteSpace(NuevoNombre);
 
-        // ── Eliminar tarea ──
         private void EliminarTarea(Tarea tarea)
         {
             _context.Tareas.Remove(tarea);
             _context.SaveChanges();
             Tareas.Remove(tarea);
-
             ActualizarContadores();
         }
 
-        // ── Marcar como completada / pendiente ──
-        private void MarcarCompletada(Tarea tarea)
+        // Toggle simple: no toca la colección, solo la propiedad
+        private void ToggleEstado(Tarea tarea)
         {
-            tarea.Completada = !tarea.Completada;
+            tarea.Completada = !tarea.Completada; // Tarea notifica sola la UI
             _context.Tareas.Update(tarea);
             _context.SaveChanges();
-
-            // Refrescar el item en la lista para que el Estado se actualice
-            int index = Tareas.IndexOf(tarea);
-            if (index >= 0)
-            {
-                Tareas.RemoveAt(index);
-                Tareas.Insert(index, tarea);
-            }
-
             ActualizarContadores();
         }
 
-        // ── Actualizar los tres contadores del resumen ──
         private void ActualizarContadores()
         {
             OnPropertyChanged(nameof(TotalTareas));
@@ -137,9 +123,18 @@ namespace Gestion_de_Tareas.ViewModels
             OnPropertyChanged(nameof(TareasCompletadas));
         }
 
-        // ── INotifyPropertyChanged ──
         public event PropertyChangedEventHandler? PropertyChanged;
-        protected void OnPropertyChanged([CallerMemberName] string nombre = "")
-            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nombre));
+        protected void OnPropertyChanged([CallerMemberName] string n = "")
+            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(n));
+
+
+        private void ActualizarTarea(Tarea tarea)
+        {
+            _context.Tareas.Update(tarea);
+            _context.SaveChanges();
+            // Tarea ya tiene INotifyPropertyChanged, notifica sola la UI
+            ActualizarContadores();
+        }
     }
+
 }
