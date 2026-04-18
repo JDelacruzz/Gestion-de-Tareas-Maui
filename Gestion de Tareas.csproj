@@ -74,6 +74,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Views\DetalleTareaPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\GestionTareasPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

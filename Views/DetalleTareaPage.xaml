@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Gestion_de_Tareas.Views.DetalleTareaPage"
+             Title="Editar Tarea"
+             BackgroundColor="{StaticResource FondoPagina}">
+
+    <ScrollView>
+        <StackLayout Padding="20" Spacing="16">
+
+            <Label Text="Editar Tarea" FontSize="22" FontAttributes="Bold"
+                   TextColor="{StaticResource TextoPrincipal}" Margin="0,10,0,0"/>
+
+            <!-- Nombre -->
+            <Label Text="Nombre" FontSize="13" TextColor="{StaticResource TextoSecundario}"/>
+            <Border BackgroundColor="{StaticResource FondoEntry}"
+                    StrokeShape="RoundRectangle 10"
+                    Stroke="{StaticResource ColorSeparador}" Padding="12,0">
+                <Entry x:Name="EntryNombre" FontSize="15"
+                       TextColor="{StaticResource TextoPrincipal}"
+                       PlaceholderColor="{StaticResource TextoPlaceholder}"
+                       Placeholder="Nombre de la tarea"/>
+            </Border>
+
+            <!-- Descripción -->
+            <Label Text="Descripción" FontSize="13" TextColor="{StaticResource TextoSecundario}"/>
+            <Border BackgroundColor="{StaticResource FondoEntry}"
+                    StrokeShape="RoundRectangle 10"
+                    Stroke="{StaticResource ColorSeparador}" Padding="12,8">
+                <Editor x:Name="EditorDescripcion" FontSize="14"
+                        TextColor="{StaticResource TextoPrincipal}"
+                        PlaceholderColor="{StaticResource TextoPlaceholder}"
+                        Placeholder="Descripción de la tarea..."
+                        HeightRequest="100" AutoSize="Disabled"/>
+            </Border>
+
+            <!-- Prioridad -->
+            <Label Text="Prioridad" FontSize="13" TextColor="{StaticResource TextoSecundario}"/>
+            <Border BackgroundColor="{StaticResource FondoEntry}"
+                    StrokeShape="RoundRectangle 10"
+                    Stroke="{StaticResource ColorSeparador}" Padding="12,0">
+                <Picker x:Name="PickerPrioridad"
+                        TextColor="{StaticResource TextoPrincipal}" FontSize="15">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Alta</x:String>
+                            <x:String>Media</x:String>
+                            <x:String>Baja</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+            </Border>
+
+            <!-- Fecha -->
+            <Label Text="Fecha de vencimiento" FontSize="13"
+                   TextColor="{StaticResource TextoSecundario}"/>
+            <Border BackgroundColor="{StaticResource FondoEntry}"
+                    StrokeShape="RoundRectangle 10"
+                    Stroke="{StaticResource ColorSeparador}" Padding="12,4">
+                <DatePicker x:Name="DatePickerFecha"
+                            TextColor="{StaticResource TextoPrincipal}"
+                            FontSize="15" Format="dd/MM/yyyy"/>
+            </Border>
+
+            <!-- Botón Guardar -->
+            <Button Text="Guardar Cambios" x:Name="BtnGuardar"
+                    BackgroundColor="{StaticResource ColorAgregar}"
+                    TextColor="White" FontAttributes="Bold" FontSize="15"
+                    CornerRadius="12" HeightRequest="52"
+                    Margin="0,10,0,0" Clicked="BtnGuardar_Clicked"/>
+
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

@@ -46,6 +46,8 @@ namespace Gestion_de_Tareas.ViewModels
         public ICommand AgregarTareaCommand { get; }
         public ICommand EliminarTareaCommand { get; }
         public ICommand ToggleEstadoCommand { get; }
+        public ICommand ActualizarTareaCommand { get; }
+        public ICommand AbrirDetalleCommand { get; }
 
         public TareasViewModel(TareasDbContext context)
         {
@@ -55,6 +57,13 @@ namespace Gestion_de_Tareas.ViewModels
             AgregarTareaCommand = new Command(AgregarTarea, PuedeAgregar);
             EliminarTareaCommand = new Command<Tarea>(EliminarTarea);
             ToggleEstadoCommand = new Command<Tarea>(ToggleEstado);
+            ActualizarTareaCommand = new Command<Tarea>(ActualizarTarea);
+
+            AbrirDetalleCommand = new Command<Tarea>(async (tarea) =>
+            {
+                var detalle = new Views.DetalleTareaPage(this, tarea);
+                await Shell.Current.Navigation.PushAsync(detalle);
+            });
 
             Tareas.CollectionChanged += (s, e) => ActualizarContadores();
             CargarTareas();
@@ -117,5 +126,15 @@ namespace Gestion_de_Tareas.ViewModels
         public event PropertyChangedEventHandler? PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string n = "")
             => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(n));
+
+
+        private void ActualizarTarea(Tarea tarea)
+        {
+            _context.Tareas.Update(tarea);
+            _context.SaveChanges();
+            // Tarea ya tiene INotifyPropertyChanged, notifica sola la UI
+            ActualizarContadores();
+        }
     }
+
 }
