@@ -26,6 +26,10 @@ namespace Gestion_de_Tareas
             builder.Services.AddTransient<TareasViewModel>();
             builder.Services.AddTransient<GestionTareasPage>();
 
+            builder.Services.AddTransient<TotalTareas>();
+            builder.Services.AddTransient<TareasPendientes>();
+            builder.Services.AddTransient<TareasCompletadas>();
+
 #if DEBUG
             builder.Logging.AddDebug();
 #endif
